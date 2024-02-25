@@ -19,7 +19,7 @@ def executeSqlQuery(db, llm, question = "How many employees are there"):
     execute_query = QuerySQLDataBaseTool(db=db)
     write_query = create_sql_query_chain(llm, db)
     chain = write_query | execute_query
-    chain.invoke({"question": question})
+    return chain.invoke({"question": question})
 
 def answerTheQuestions(db, llm, question = "How many employees are there"):
     answer_prompt = PromptTemplate.from_template(
@@ -41,4 +41,4 @@ def answerTheQuestions(db, llm, question = "How many employees are there"):
         | answer
     )
 
-    chain.invoke({"question": question})
+    return chain.invoke({"question": question})
